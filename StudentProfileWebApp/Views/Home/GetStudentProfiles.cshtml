@@ -1,0 +1,36 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model IEnumerable<StudentProfile>?
+<h2>@ViewData["Title"]</h2>
+
+<table class="table">
+    <thread>
+        <tr>
+            <th>Student ID</th>
+            <th>Name</th>
+            <th>GPA</th>
+            <th>Email</th>
+            <th>Major</th>
+            <th>Phone Number</th>
+        </tr>
+        <tbody>
+            @if(Model is not null)
+            {
+                @foreach(StudentProfile profile in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor((modelItem) => profile.Id)</td>
+                        <td>@Html.DisplayFor((modelItem) => profile.Name)</td>
+                        <td>@Html.DisplayFor((modelItem) => profile.GPA)</td>
+                        <td>@Html.DisplayFor((modelItem) => profile.StudentEmail)</td>
+                        <td>@Html.DisplayFor((modelItem) => profile.Major)</td>
+                        <td>@Html.DisplayFor((modelItem) => profile.PhoneNumber)</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </thread>
+</table>

@@ -1,0 +1,51 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<h3>Query students from a database</h3>
+<form asp-action="GetStudentProfiles" method="get">
+    <input name="getStudentId" placeholder="Enter an ID or leave blank to get all" />
+    <input type="submit" />
+</form>
+
+<br />
+
+<h3>Create a new student profile</h3>
+<form asp-action="PostStudentProfile" method="post">
+    <input name="postName" placeholder="Enter the student's name" />
+    <input name="postGpa" placeholder="Enter the student's GPA" />
+    <input name="postEmail" placeholder="Enter the student's email" />
+    <input name="postMajor" placeholder="Enter the student's major" />
+    <input name="postPhone" placeholder="Enter the student's phone number" />
+    <input name="postUsername" placeholder="Student's username" />
+    <input name="postPassword" placeholder="Student's password" type="password" />
+    <input type="submit" />
+</form>
+
+<br />
+
+<h3>Change a student's profile</h3>
+<form asp-action="PutStudentProfile" method="put">
+    <input name="putId" placeholder="Enter the student's ID" />
+    <input name="putName" placeholder="Enter the student's name" />
+    <input name="putGpa" placeholder="Enter the student's GPA" />
+    <input name="putEmail" placeholder="Enter the student's email" />
+    <input name="putMajor" placeholder="Enter the student's major" />
+    <input name="putPhone" placeholder="Enter the student's phone number" />
+    <input name="putUsername" placeholder="Student's username" />
+    <input name="putPassword" placeholder="Student's password" type="password" />
+    <input type="submit" />
+</form>
+
+<br />
+
+<h3>Delete a student's profile</h3>
+<form asp-action="DeleteStudentProfile" method="delete">
+    <input name="deleteStudentId" placeholder="Enter the student's ID" />
+    <input type="submit" />
+</form>
