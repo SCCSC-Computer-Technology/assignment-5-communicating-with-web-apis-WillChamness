@@ -151,6 +151,11 @@ namespace StudentProfileWebApp.Controllers
                 ViewData["Title"] = "Bad GPA";
                 return View(); 
             }
+            catch(ArgumentNullException) 
+            {
+                ViewData["Title"] = "Bad GPA";
+                return View();
+            }
         }
 
         /// <summary>
