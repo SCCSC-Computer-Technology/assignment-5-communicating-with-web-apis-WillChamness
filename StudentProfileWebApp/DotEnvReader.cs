@@ -35,7 +35,7 @@
             foreach (string line in lines)
             {
                 string[] splitLine = line.Split('=');
-                if (splitLine.Length != 2) { return false; }
+                if (splitLine.Length != 2) { return false; } // bad syntax
 
                 environmentVariables.Add(splitLine);
             }
