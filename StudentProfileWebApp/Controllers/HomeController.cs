@@ -9,11 +9,15 @@ namespace StudentProfileWebApp.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IHttpClientFactory clientFactory;
+        private string studentProfileApiPath;
 
         public HomeController(ILogger<HomeController> logger, IHttpClientFactory httpClientFactory)
         {
             _logger = logger;
             clientFactory = httpClientFactory;
+
+            string? profilePath = Environment.GetEnvironmentVariable("STUDENT_PROFILE_API_PATH");
+            studentProfileApiPath = profilePath is not null ? profilePath + "/" : "api/students/"; // add extra '/' just in case
         }
 
         public IActionResult Index()
@@ -62,12 +66,12 @@ namespace StudentProfileWebApp.Controllers
             if (getStudentId is null)
             {
                 ViewData["Title"] = "All Students";
-                uri = "api/StudentProfiles";
+                uri = studentProfileApiPath;
             }
             else
             {
                 ViewData["Title"] = "Student with ID " + getStudentId;
-                uri = "api/StudentProfiles/" + getStudentId; 
+                uri = studentProfileApiPath + getStudentId; 
             }
 
             HttpClient httpClient = clientFactory.CreateClient(name: "StudentProfilesWebApi");
@@ -108,7 +112,7 @@ namespace StudentProfileWebApp.Controllers
         /// <returns>If there are no errors, a task that resolves to a view of the new student profile. Otherwise, an empty view.</returns>
         public async Task<IActionResult> PostStudentProfile(string postName, string postGpa, string postEmail, string postMajor, string postPhone, string postUsername, string postPassword)
         {
-            string uri = "api/StudentProfiles";
+            string uri = studentProfileApiPath;
             HttpClient httpClient = clientFactory.CreateClient(name: "StudentProfilesWebApi");
 
             try
@@ -150,7 +154,7 @@ namespace StudentProfileWebApp.Controllers
         }
 
         /// <summary>
-        /// Replaces an existing student profile
+        /// Replaces an existing student profile via PUT
         /// </summary>
         /// <param name="putId">The student's ID</param>
         /// <param name="putName">The student's name</param>
@@ -199,7 +203,7 @@ namespace StudentProfileWebApp.Controllers
             studentProfile.StudentUserName = putUsername;
             studentProfile.password = putPassword;
 
-            string uri = "api/StudentProfiles/" + putId;
+            string uri = studentProfileApiPath + putId;
             HttpClient httpClient = clientFactory.CreateClient(name: "StudentProfilesWebApi");
 
             HttpResponseMessage response = await httpClient.PutAsJsonAsync(uri, studentProfile);
@@ -258,7 +262,7 @@ namespace StudentProfileWebApp.Controllers
                 return View(); 
             }
 
-            string uri = "api/StudentProfiles/" + deleteStudentId;
+            string uri = studentProfileApiPath + deleteStudentId;
 
             HttpClient httpClient = clientFactory.CreateClient(name: "StudentProfilesWebApi");
 
