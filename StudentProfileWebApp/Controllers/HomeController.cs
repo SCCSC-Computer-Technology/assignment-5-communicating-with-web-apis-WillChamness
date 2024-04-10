@@ -86,7 +86,7 @@ namespace StudentProfileWebApp.Controllers
             {
                 model = await response.Content.ReadFromJsonAsync<IEnumerable<StudentProfile>>();
             }
-            else // json result is object, not array. must parse json and add it to a list of length 1 to satisfy type definition of models
+            else // json result is object, not array. must parse json and add it to a list of length 1 to satisfy type definition of model
             {
                 string json = await response.Content.ReadAsStringAsync();
                 StudentProfile? studentProfile = JsonSerializer.Deserialize<StudentProfile>(json, 
